@@ -9,6 +9,7 @@
 <body>
     <!-- Tela de Login / Cadastro -->
     <div id="auth-screen" class="auth-overlay">
+        <!-- (Mantido igual ao anterior) -->
         <div class="auth-box">
             <div class="logo-large">
                 <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -67,16 +68,86 @@
             <div class="loader">Carregando dados do servidor...</div>
         </main>
 
-        <button class="add-list-btn admin-only" onclick="addList()">+ Adicionar Lista</button>
+        <button class="add-list-btn admin-only" onclick="openNewListModal()">+ Adicionar Lista</button>
     </div>
 
-    <!-- Modal de Configurações da Empresa -->
+    <!-- MODAIS DO SISTEMA -->
+
+    <!-- Modal: Configurações -->
     <div id="config-modal" class="modal-overlay" style="display:none;">
         <div class="modal-box">
             <h3>Perfil da Empresa</h3>
-            <p>Compartilhe o código abaixo com seus funcionários para que eles se cadastrem na sua área de trabalho:</p>
+            <p>Compartilhe o código abaixo com seus funcionários:</p>
             <div class="code-display" id="display-company-code"></div>
-            <button class="primary-btn" onclick="closeConfig()">Fechar</button>
+            <button class="primary-btn" onclick="closeModal('config-modal')">Fechar</button>
+        </div>
+    </div>
+
+    <!-- Modal: Nova Lista -->
+    <div id="modal-new-list" class="modal-overlay" style="display:none;">
+        <div class="modal-box">
+            <h3>Nova Lista</h3>
+            <input type="text" id="input-new-list-title" placeholder="Nome da lista...">
+            <div class="modal-actions-row">
+                <button class="secondary-btn" onclick="closeModal('modal-new-list')">Cancelar</button>
+                <button class="primary-btn" onclick="confirmAddList()">Criar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Nova Demanda (Card) -->
+    <div id="modal-new-card" class="modal-overlay" style="display:none;">
+        <div class="modal-box">
+            <h3>Nova Demanda</h3>
+            <input type="text" id="input-new-card-title" placeholder="Título da demanda ou Link">
+            <select id="select-new-card-assignee" class="apple-select">
+                <!-- Preenchido via JS -->
+            </select>
+            <div class="modal-actions-row">
+                <button class="secondary-btn" onclick="closeModal('modal-new-card')">Cancelar</button>
+                <button class="primary-btn" onclick="confirmAddCard()">Adicionar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu Rápido (Quick Actions Trello) -->
+    <div id="quick-actions-menu" class="context-menu" style="display:none;">
+        <button onclick="openCardDetails()">􀏜 Abrir cartão</button>
+        <button>􀏧 Editar Etiquetas</button>
+        <button>􀉮 Alterar Membros</button>
+        <button>􀏚 Alterar capa</button>
+        <button>􀐫 Editar datas</button>
+        <button>􀍢 Mover</button>
+        <button>􀆄 Criar ticket do Jira</button>
+        <button>􀉁 Copiar cartão</button>
+        <button>􀉂 Copiar link</button>
+        <button>􀏜 Espelho</button>
+        <button class="danger-text">􀈑 Arquivar</button>
+    </div>
+
+    <!-- Modal: Detalhes do Cartão (Trello View) -->
+    <div id="modal-card-details" class="modal-overlay" style="display:none;">
+        <div class="modal-box modal-large">
+            <div class="card-detail-header">
+                <div class="card-detail-title-area">
+                    <div class="check-circle large" onclick="toggleDetailCheck(this)"></div>
+                    <h2 id="detail-card-title">Título da Demanda</h2>
+                </div>
+                <div class="card-detail-badges">
+                    <button class="badge-btn">􀅼 Adicionar</button>
+                    <button class="badge-btn">􀏧 Etiquetas</button>
+                    <button class="badge-btn">􀐫 Datas</button>
+                    <button class="badge-btn">􀆄 Checklist</button>
+                    <button class="badge-btn">􀉮 Membros</button>
+                </div>
+            </div>
+            <div class="card-detail-body">
+                <h3 class="section-title">􀌗 Descrição</h3>
+                <textarea class="apple-textarea" placeholder="Adicione uma descrição mais detalhada..."></textarea>
+            </div>
+            <div class="modal-actions-row right-align">
+                <button class="primary-btn" onclick="closeModal('modal-card-details')">Fechar</button>
+            </div>
         </div>
     </div>
 

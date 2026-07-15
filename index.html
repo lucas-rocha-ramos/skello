@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skello - Gestão Simplificada</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Topbar estilo iOS -->
+    <header class="glass-header">
+        <div class="logo">
+            <span class="icon">􀏜</span> Skello
+        </div>
+        <div class="controls">
+            <label for="roleSelect">Perfil:</label>
+            <select id="roleSelect" onchange="changeRole()">
+                <option value="admin">Administrador</option>
+                <option value="user">Usuário</option>
+            </select>
+        </div>
+    </header>
+
+    <!-- Área Principal do Kanban -->
+    <main class="board-container" id="board">
+        <!-- As listas serão renderizadas aqui pelo JavaScript -->
+    </main>
+
+    <!-- Botão Flutuante (Apenas Admin) -->
+    <button class="add-list-btn admin-only" onclick="addList()">
+        􀅼 Adicionar Lista
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>

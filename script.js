@@ -1,5 +1,5 @@
 // COLE A URL DO SEU GOOGLE APPS SCRIPT AQUI DENTRO DAS ASPAS
-const API_URL = 'COLE_SUA_URL_AQUI'; 
+const API_URL = 'https://script.google.com/macros/s/AKfycbzGBEd76N8X55EGEYChxBwmBPwgmBf44DMZ1HesRubd1dHZ3E8-4bFU_4icp7YLuE8e1w/exec'; 
 
 let currentUser = null;
 let allUsers = [];

@@ -3,33 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skello - Gestão Simplificada</title>
+    <title>Skello - Workspace</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Topbar estilo iOS -->
-    <header class="glass-header">
-        <div class="logo">
-            <span class="icon">􀏜</span> Skello
+    <!-- Tela de Login / Cadastro -->
+    <div id="auth-screen" class="auth-overlay">
+        <div class="auth-box">
+            <div class="logo-large">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <rect x="3" y="3" width="18" height="18" rx="6" fill="#0071e3" stroke="none"/>
+                    <rect x="7" y="7" width="4" height="10" rx="2" fill="#fff" stroke="none"/>
+                    <rect x="13" y="7" width="4" height="6" rx="2" fill="#fff" stroke="none"/>
+                </svg>
+                Skello
+            </div>
+            <input type="text" id="username" placeholder="Nome de usuário">
+            <input type="password" id="password" placeholder="Senha">
+            <div class="auth-actions">
+                <button class="primary-btn" onclick="login()">Entrar</button>
+                <button class="secondary-btn" onclick="register()">Criar Conta</button>
+            </div>
+            <p id="auth-msg" class="msg"></p>
         </div>
-        <div class="controls">
-            <label for="roleSelect">Perfil:</label>
-            <select id="roleSelect" onchange="changeRole()">
-                <option value="admin">Administrador</option>
-                <option value="user">Usuário</option>
-            </select>
-        </div>
-    </header>
+    </div>
 
-    <!-- Área Principal do Kanban -->
-    <main class="board-container" id="board">
-        <!-- As listas serão renderizadas aqui pelo JavaScript -->
-    </main>
+    <!-- Interface do Kanban (Oculta até o login) -->
+    <div id="app-screen" style="display: none; height: 100%; flex-direction: column;">
+        <header class="glass-header">
+            <div class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <rect x="3" y="3" width="18" height="18" rx="4" fill="#0071e3" stroke="none"/>
+                    <rect x="7" y="7" width="3" height="10" rx="1.5" fill="#fff" stroke="none"/>
+                    <rect x="14" y="7" width="3" height="6" rx="1.5" fill="#fff" stroke="none"/>
+                </svg>
+                Skello
+            </div>
+            <div class="user-info">
+                <span id="user-display"></span>
+                <button class="logout-btn" onclick="logout()">Sair</button>
+            </div>
+        </header>
 
-    <!-- Botão Flutuante (Apenas Admin) -->
-    <button class="add-list-btn admin-only" onclick="addList()">
-        􀅼 Adicionar Lista
-    </button>
+        <main class="board-container" id="board">
+            <div class="loader">Carregando dados do servidor...</div>
+        </main>
+
+        <button class="add-list-btn admin-only" onclick="addList()">
+            + Adicionar Lista
+        </button>
+    </div>
 
     <script src="script.js"></script>
 </body>

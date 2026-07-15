@@ -18,8 +18,25 @@
                 </svg>
                 Skello
             </div>
-            <input type="text" id="username" placeholder="Nome de usuário">
+            
+            <div class="auth-tabs">
+                <label><input type="radio" name="authType" value="empresa" checked onchange="toggleAuthFields()"> Empresa</label>
+                <label><input type="radio" name="authType" value="user" onchange="toggleAuthFields()"> Usuário</label>
+            </div>
+
+            <input type="text" id="username" placeholder="Nome (Empresa ou Usuário)">
+            
+            <div id="fields-empresa">
+                <input type="email" id="email" placeholder="E-mail Administrativo">
+                <input type="text" id="zap" placeholder="WhatsApp Contato">
+            </div>
+            
+            <div id="fields-user" style="display: none;">
+                <input type="text" id="companyCode" placeholder="Código Único da Empresa">
+            </div>
+
             <input type="password" id="password" placeholder="Senha">
+            
             <div class="auth-actions">
                 <button class="primary-btn" onclick="login()">Entrar</button>
                 <button class="secondary-btn" onclick="register()">Criar Conta</button>
@@ -28,7 +45,7 @@
         </div>
     </div>
 
-    <!-- Interface do Kanban (Oculta até o login) -->
+    <!-- Interface do Kanban -->
     <div id="app-screen" style="display: none; height: 100%; flex-direction: column;">
         <header class="glass-header">
             <div class="logo">
@@ -41,17 +58,26 @@
             </div>
             <div class="user-info">
                 <span id="user-display"></span>
+                <button class="secondary-btn admin-only" onclick="showConfig()">Configurações</button>
                 <button class="logout-btn" onclick="logout()">Sair</button>
             </div>
         </header>
 
-        <main class="board-container" id="board">
+        <main class="board-container" id="board" ondrop="dropList(event)" ondragover="allowDropList(event)">
             <div class="loader">Carregando dados do servidor...</div>
         </main>
 
-        <button class="add-list-btn admin-only" onclick="addList()">
-            + Adicionar Lista
-        </button>
+        <button class="add-list-btn admin-only" onclick="addList()">+ Adicionar Lista</button>
+    </div>
+
+    <!-- Modal de Configurações da Empresa -->
+    <div id="config-modal" class="modal-overlay" style="display:none;">
+        <div class="modal-box">
+            <h3>Perfil da Empresa</h3>
+            <p>Compartilhe o código abaixo com seus funcionários para que eles se cadastrem na sua área de trabalho:</p>
+            <div class="code-display" id="display-company-code"></div>
+            <button class="primary-btn" onclick="closeConfig()">Fechar</button>
+        </div>
     </div>
 
     <script src="script.js"></script>
